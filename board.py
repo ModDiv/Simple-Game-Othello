@@ -1,4 +1,4 @@
-"""board.py - Logika papan Othello (tanpa pygame)."""
+"""board.py - Logika papan Othello."""
 
 EMPTY, BLACK, WHITE = 0, 1, -1
 DIRECTIONS = [(-1, -1), (-1, 0), (-1, 1),
@@ -55,6 +55,6 @@ def count_discs(board):
     white = sum(row.count(WHITE) for row in board)
     return black, white
 
-
+#langkah habis permainan selesai
 def game_over(board):
     return not get_valid_moves(board, BLACK) and not get_valid_moves(board, WHITE)

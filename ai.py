@@ -33,12 +33,23 @@ def evaluate(board, player):
     opp_moves = len(get_valid_moves(board, opp))
     mobility = 5 * (my_moves - opp_moves)
 
+    #example
+    #player 8 langkah, lawan 3 langkah
+    #5 x (8-3)= +25 >> nilai ini dipakai oleh minimax untuk pertimbangan langkah
+
     # 3. Selisih disk, bobotnya naik di akhir permainan
     total = black + white
     disc_diff = (black - white) * player
     disc_score = disc_diff * (total / 64) * 2
 
     return positional + mobility + disc_score
+
+#example
+#positional = +40
+#mobility   = +25
+#disc_score =  +3
+#-------------------
+#skor akhir = +68
 
 
 def alphabeta(board, depth, alpha, beta, current, ai):
@@ -66,7 +77,7 @@ def alphabeta(board, depth, alpha, beta, current, ai):
         for move in moves:
             new_board = apply_move(board, move, current)
             score, _ = alphabeta(new_board, depth - 1, alpha, beta, -current, ai)
-            if score > value:
+            if score > value: 
                 value, best_move = score, move
             alpha = max(alpha, value)
             if alpha >= beta:

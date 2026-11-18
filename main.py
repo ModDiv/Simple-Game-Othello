@@ -1,4 +1,4 @@
-"""main.py - Tampilan pygame dan game loop. Jalankan file ini."""
+
 
 import pygame
 
@@ -6,11 +6,13 @@ from board import (BLACK, WHITE, apply_move, count_discs, game_over,
                    get_valid_moves, new_board)
 from ai import ai_choose_move
 
+# BOARD
 CELL = 80
 BOARD_SIZE = CELL * 8
 BAR_HEIGHT = 70
 WIDTH, HEIGHT = BOARD_SIZE, BOARD_SIZE + BAR_HEIGHT
 
+# RGB
 GREEN = (34, 139, 34)
 DARK_GREEN = (0, 90, 0)
 BLACK_C = (20, 20, 20)
@@ -101,6 +103,7 @@ def main(depth=3):
                     depth = 3
                 elif event.key == pygame.K_3:
                     depth = 4
+
             elif event.type == pygame.MOUSEBUTTONDOWN and turn == HUMAN and not over:
                 x, y = event.pos
                 if y < BOARD_SIZE:
@@ -110,10 +113,12 @@ def main(depth=3):
                         turn = AI
                         message = ""
 
+                        #Contoh: klik di pixel (x=250, y=180) → r = 180//80 = 2, c = 250//80 = 3 → kotak (2,3).
+
         draw_board(screen, font, board, valid_moves, turn, depth, message, over)
         pygame.display.flip()
 
-        # Giliran AI (layar digambar dulu supaya terlihat "berpikir")
+        # Giliran AI 
         if turn == AI and not over and valid_moves:
             move = ai_choose_move(board, AI, depth)
             if move:
